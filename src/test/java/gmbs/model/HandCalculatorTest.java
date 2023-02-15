@@ -12,16 +12,16 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class HandCheckerTest {
+class HandCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("player 손패의 카드 합을 계산한다")
     @MethodSource("hands")
     void handSum(CardHand hand, int cardSumExpected) {
         //given
-        HandChecker checker = new HandChecker();
+        HandCalculator calculator = new HandCalculator();
         //when
-        int actual = checker.handSum(hand);
+        int actual = calculator.sumHand(hand);
         //then
         assertThat(actual).isEqualTo(cardSumExpected);
     }
@@ -33,15 +33,16 @@ class HandCheckerTest {
         Card clubAce = new Card(CardSuits.CLUB, BlackJackValue.ACE);
         Card spadeQueen = new Card(CardSuits.SPADE, BlackJackValue.QUEEN);
         Card spadeKing = new Card(CardSuits.SPADE, BlackJackValue.KING);
-        Card spadeNine = new Card(CardSuits.SPADE, BlackJackValue.NINE);
+        Card spadeSix = new Card(CardSuits.SPADE, BlackJackValue.SIX);
         return Stream.of(
                 Arguments.of(CardHand.of(List.of(spadeAce, heartAce)), 12),
                 Arguments.of(CardHand.of(List.of(spadeAce, heartAce ,spadeQueen)), 12),
                 Arguments.of(CardHand.of(List.of(spadeAce, spadeQueen)), 21),
                 Arguments.of(CardHand.of(List.of(spadeAce, heartAce, diamondAce, clubAce)), 14),
-                Arguments.of(CardHand.of(List.of(spadeKing, spadeQueen, spadeNine)), 29),
+                Arguments.of(CardHand.of(List.of(spadeKing, spadeQueen, spadeSix)), 26),
                 Arguments.of(CardHand.of(List.of(spadeKing, spadeQueen, spadeAce)), 21),
-                Arguments.of(CardHand.of(List.of(spadeKing, spadeQueen)), 20)
-        );
+                Arguments.of(CardHand.of(List.of(spadeKing, spadeQueen)), 20),
+                Arguments.of(CardHand.of(List.of(spadeAce, spadeSix)), 17)
+                );
     }
 }

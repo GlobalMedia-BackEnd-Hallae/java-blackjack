@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 
-public class HandChecker {
+public class HandCalculator {
 
     private static final int BLACK_JACK = 21;
     private static final int SMALLER_ACE_VALUE = BlackJackValue.ACE.value();
     private static final int BIGGER_ACE_VALUE = BlackJackValue.ACE.alternativeValue();
 
-    public int handSum(CardHand hand) {
+    public int sumHand(CardHand hand) {
         if (hand.aceCount() > 0) {
-            return handSumWithAce(hand);
+            return sumHandWithAce(hand);
         }
-        return handSumNoAce(hand);
+        return sumNoAceHand(hand);
     }
 
-    private int handSumNoAce(CardHand hand) {
+    private int sumNoAceHand(CardHand hand) {
         return hand.getCards()
                 .stream()
                 .map(Card::getNumberValue)
@@ -28,11 +28,11 @@ public class HandChecker {
                 .sum();
     }
 
-    private int handSumWithAce(CardHand hand) {
+    private int sumHandWithAce(CardHand hand) {
         int sumWithoutAce = sumWithoutAce(hand);
         List<Integer> possibleAceSum = possibleSumAce(hand.aceCount());
         OptionalInt sum = sumWithAce(sumWithoutAce, possibleAceSum);
-        if(sum.isPresent()){
+        if (sum.isPresent()) {
             return sum.getAsInt();
         }
         throw new IllegalArgumentException("[err] hand already busted");
@@ -52,9 +52,13 @@ public class HandChecker {
     private OptionalInt sumWithAce(int sumWithoutAce, List<Integer> possibleAceSum) {
         return possibleAceSum.stream()
                 .map(sumAce -> sumAce + sumWithoutAce)
-                .filter(sum -> sum <= BLACK_JACK)
+                .filter(sum -> !isBust(sum))
                 .mapToInt(Integer::intValue)
                 .max();
+    }
+
+    private boolean isBust(int sumValue) {
+        return sumValue > BLACK_JACK;
     }
 
     private List<Integer> possibleSumAce(int aceCount) {
