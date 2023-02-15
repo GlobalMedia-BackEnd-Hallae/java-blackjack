@@ -23,14 +23,14 @@ public class HandChecker {
     private int handSumNoAce(CardHand hand) {
         return hand.getCards()
                 .stream()
-                .map(Card::getValue)
+                .map(Card::getNumberValue)
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
     private int handSumWithAce(CardHand hand) {
         int sumWithoutAce = sumWithoutAce(hand);
-        List<Integer> possibleAceSum = possibleAceSum(hand.aceCount());
+        List<Integer> possibleAceSum = possibleSumAce(hand.aceCount());
         OptionalInt sum = sumWithAce(sumWithoutAce, possibleAceSum);
         if(sum.isPresent()){
             return sum.getAsInt();
@@ -44,12 +44,12 @@ public class HandChecker {
                 .filter(card -> !card.getCardValue()
                         .name()
                         .equals("ACE"))
-                .map(Card::getValue)
+                .map(Card::getNumberValue)
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
-    private static OptionalInt sumWithAce(int sumWithoutAce, List<Integer> possibleAceSum) {
+    private OptionalInt sumWithAce(int sumWithoutAce, List<Integer> possibleAceSum) {
         return possibleAceSum.stream()
                 .map(sumAce -> sumAce + sumWithoutAce)
                 .filter(sum -> sum <= BLACK_JACK)
@@ -57,18 +57,21 @@ public class HandChecker {
                 .max();
     }
 
-
-    private List<Integer> possibleAceSum(int aceCount) {
+    private List<Integer> possibleSumAce(int aceCount) {
         if (aceCount == 1) {
             return List.of(SMALLER_ACE_VALUE, BIGGER_ACE_VALUE);
-        } else {
-            List<Integer> previousDegree = possibleAceSum(aceCount - 1);
-            int lastValue = previousDegree.get(previousDegree.size() - 1) + BIGGER_ACE_VALUE;
-            List<Integer> currentDegree = new ArrayList<>(previousDegree.stream()
-                    .map(value -> value + SMALLER_ACE_VALUE)
-                    .toList());
-            currentDegree.add(lastValue);
-            return currentDegree;
         }
+        List<Integer> previousDegree = possibleSumAce(aceCount - 1);
+        return getCurrentDegree(previousDegree);
+    }
+
+    private List<Integer> getCurrentDegree(List<Integer> previousDegree) {
+        int previousLastIndex = previousDegree.size() - 1;
+        int currentLastValue = previousDegree.get(previousLastIndex) + BIGGER_ACE_VALUE;
+        List<Integer> currentDegree = new ArrayList<>(previousDegree.stream()
+                .map(value -> value + SMALLER_ACE_VALUE)
+                .toList());
+        currentDegree.add(currentLastValue);
+        return currentDegree;
     }
 }

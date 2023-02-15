@@ -14,8 +14,12 @@ public class Card {
         cardValue = value;
         cardName = shape.getDescription() + value.getDescription();
     }
-    
-    public int getValue() {
+
+    public BlackJackValue getCardValue() {
+        return cardValue;
+    }
+
+    public int getNumberValue() {
         return cardValue.value();
     }
 

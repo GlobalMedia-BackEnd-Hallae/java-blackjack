@@ -24,4 +24,14 @@ public class CardHand {
     public List<Card> getCards() {
         return cards;
     }
+
+    public int aceCount() {
+        return cards.stream()
+                .filter(card -> card
+                        .getCardValue()
+                        .name()
+                        .equals("ACE"))
+                .toList()
+                .size();
+    }
 }
