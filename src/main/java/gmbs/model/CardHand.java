@@ -25,6 +25,10 @@ public class CardHand {
         return cards;
     }
 
+    public int getHandCount() {
+        return cards.size();
+    }
+
     public int aceCount() {
         return cards.stream()
                 .filter(card -> card
