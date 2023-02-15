@@ -1,4 +1,4 @@
-package gmbs.black_jack_enum;
+package gmbs.model.black_jack_enum;
 
 public enum CardSuits {
 
