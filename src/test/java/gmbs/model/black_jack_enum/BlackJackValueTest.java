@@ -1,4 +1,4 @@
-package gmbs.black_jack_enum;
+package gmbs.model.black_jack_enum;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +10,6 @@ class BlackJackValueTest {
     @Test
     @DisplayName("hasAlternativeValue가 false 일 때 alternatvieValue를 호출하면 예외를 발생")
     void exceptionByAlternativeValue() {
-        assertThatThrownBy(BlackJackCard.JACK::alternativeValue);
+        assertThatThrownBy(BlackJackValue.JACK::alternativeValue);
     }
 }
