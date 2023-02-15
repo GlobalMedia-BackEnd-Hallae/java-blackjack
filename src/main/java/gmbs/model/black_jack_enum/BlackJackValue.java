@@ -32,10 +32,6 @@ public enum BlackJackValue {
         return value;
     }
 
-    public boolean hasAlternativeValue() {
-        return hasAlternativeValue;
-    }
-
     public int alternativeValue() {
         if(!hasAlternativeValue) {
             throw new IllegalArgumentException("[err] has no alternative value");
