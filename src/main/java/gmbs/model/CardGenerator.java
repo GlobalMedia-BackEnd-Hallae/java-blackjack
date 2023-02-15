@@ -16,7 +16,7 @@ public class CardGenerator {
                 .toList();
     }
 
-    private List<Card> createByShape(CardSuits shape) {
+    private List<Card> createByShape(final CardSuits shape) {
         return Arrays.stream(BlackJackValue.values())
                 .map(cardValue -> new Card(shape, cardValue))
                 .toList();
