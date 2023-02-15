@@ -7,10 +7,10 @@ public class WinnerChecker {
 
     private static final int BLACK_JACK = 21;
     private final HandCalculator calculator = new HandCalculator();
-    private final int dealerHandValue;
+    private final int targetHandValue;
 
     public WinnerChecker(Player comparisonTarget) {
-        dealerHandValue = calculator.sumHand(comparisonTarget.getCardHand());
+        targetHandValue = calculator.sumHand(comparisonTarget.getCardHand());
     }
 
     public Result getResult(Player player) {
@@ -19,23 +19,23 @@ public class WinnerChecker {
     }
 
     private Result getResultByValue(int userHandValue) {
-        if (isBust(dealerHandValue) && !isBust(userHandValue)) {
+        if (isBust(targetHandValue) && !isBust(userHandValue)) {
             return Result.WIN;
         }
-        if (!isBust(dealerHandValue) && isBust(userHandValue)) {
+        if (!isBust(targetHandValue) && isBust(userHandValue)) {
             return Result.LOSE;
         }
-        if (!isBust(dealerHandValue) && !isBust(userHandValue)) {
+        if (!isBust(targetHandValue) && !isBust(userHandValue)) {
             return getNoBustResult(userHandValue);
         }
         return Result.DRAW;
     }
 
     private Result getNoBustResult(int userHandValue) {
-        if (dealerHandValue > userHandValue) {
+        if (targetHandValue > userHandValue) {
             return Result.LOSE;
         }
-        if (dealerHandValue < userHandValue) {
+        if (targetHandValue < userHandValue) {
             return Result.WIN;
         }
         return Result.DRAW;
