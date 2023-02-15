@@ -15,4 +15,9 @@ public class Dealer implements Player {
     public Dealer hit(Card card) {
         return new Dealer(CardHand.from(this.cards, card));
     }
+
+    @Override
+    public CardHand getCardHand() {
+        return cards;
+    }
 }

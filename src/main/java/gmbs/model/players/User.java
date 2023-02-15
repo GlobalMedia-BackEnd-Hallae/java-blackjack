@@ -13,10 +13,6 @@ public class User implements Player {
         this.cardHand = cardHand;
     }
 
-    public CardHand getCardHand() {
-        return cardHand;
-    }
-
     public String getName() {
         return name;
     }
@@ -24,5 +20,10 @@ public class User implements Player {
     @Override
     public User hit(Card card) {
        return new User(this.name, CardHand.from(this.cardHand, card));
+    }
+
+    @Override
+    public CardHand getCardHand() {
+        return cardHand;
     }
 }
