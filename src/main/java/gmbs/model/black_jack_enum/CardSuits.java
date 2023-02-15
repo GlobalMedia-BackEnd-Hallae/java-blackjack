@@ -2,18 +2,18 @@ package gmbs.model.black_jack_enum;
 
 public enum CardSuits {
 
-    SPADE("spade"),
-    CLUB("club"),
-    HEART("heart"),
-    DIAMOND("diamond");
+    SPADE("♠"),
+    CLUB("♣"),
+    HEART("♥"),
+    DIAMOND("◆");
 
-    private final String name;
+    private final String description;
 
-    CardSuits(String name) {
-        this.name = name;
+    CardSuits(final String description) {
+        this.description = description;
     }
 
     public String getDescription() {
-        return name;
+        return description;
     }
 }
