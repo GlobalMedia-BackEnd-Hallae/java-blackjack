@@ -9,7 +9,6 @@ public class WinnerChecker {
     private final HandCalculator calculator = new HandCalculator();
     private final int dealerHandValue;
 
-
     public WinnerChecker(Player comparisonTarget) {
         dealerHandValue = calculator.sumHand(comparisonTarget.getCardHand());
     }
@@ -20,23 +19,23 @@ public class WinnerChecker {
     }
 
     private Result getResultByValue(int userHandValue) {
-        if(isBust(dealerHandValue) && !isBust(userHandValue)) {
+        if (isBust(dealerHandValue) && !isBust(userHandValue)) {
             return Result.WIN;
         }
-        if(!isBust(dealerHandValue) && isBust(userHandValue)) {
+        if (!isBust(dealerHandValue) && isBust(userHandValue)) {
             return Result.LOSE;
         }
-        if(!isBust(dealerHandValue) && !isBust(userHandValue)) {
+        if (!isBust(dealerHandValue) && !isBust(userHandValue)) {
             return getNoBustResult(userHandValue);
         }
         return Result.DRAW;
     }
 
     private Result getNoBustResult(int userHandValue) {
-        if(dealerHandValue > userHandValue) {
+        if (dealerHandValue > userHandValue) {
             return Result.LOSE;
         }
-        if(dealerHandValue < userHandValue) {
+        if (dealerHandValue < userHandValue) {
             return Result.WIN;
         }
         return Result.DRAW;
