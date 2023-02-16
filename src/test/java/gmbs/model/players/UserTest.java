@@ -19,14 +19,13 @@ class UserTest {
         //given
         Card firstCard = new Card(CardSuits.SPADE, BlackJackValue.ACE);
         Card secondCard = new Card(CardSuits.HEART, BlackJackValue.ACE);
-        Card hitCard = new Card(CardSuits.DIAMOND, BlackJackValue.ACE);
-        CardHand defaultCardHand = CardHand.of(List.of(firstCard, secondCard));
-        User user = new User("user", defaultCardHand);
+        CardHand beforeHitHand = CardHand.of(List.of(firstCard, secondCard));
+        CardHand hitDraw = CardHand.of(List.of(new Card(CardSuits.DIAMOND, BlackJackValue.ACE)));
+        User user = new User("user", beforeHitHand);
         //when
-        List<Card> afterHitCards = user.hit(hitCard)
-                .getCardHand()
-                .getCards();
+        CardHand afterHitHand = user.draw(hitDraw)
+                .getCardHand();
         //then
-        assertThat(hitCard).isIn(afterHitCards);
+        assertThat(afterHitHand.getCards()).containsAll(beforeHitHand.getCards());
     }
 }

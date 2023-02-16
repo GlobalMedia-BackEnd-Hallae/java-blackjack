@@ -11,9 +11,9 @@ public class CardHand {
         return new CardHand(cards);
     }
 
-    public static CardHand from(CardHand cardHand, Card addCard) {
-        List<Card> addedCards = new ArrayList<>(cardHand.getCards());
-        addedCards.add(addCard);
+    public static CardHand from(CardHand presentHand, CardHand drawHand) {
+        List<Card> addedCards = new ArrayList<>(presentHand.getCards());
+        addedCards.addAll(drawHand.getCards());
         return new CardHand(addedCards);
     }
 

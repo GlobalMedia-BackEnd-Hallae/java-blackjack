@@ -4,15 +4,27 @@ import java.util.*;
 
 public class Deck {
 
-    private final Deque<Card> cards;
+    private final Deque<Card> deckCards;
 
-    public Deck(final List<Card> cards) {
-        List<Card> cardsCopy = new ArrayList<>(cards);
+    public Deck(final List<Card> deckCards) {
+        List<Card> cardsCopy = new ArrayList<>(deckCards);
         Collections.shuffle(cardsCopy);
-        this.cards = new ArrayDeque<>(cardsCopy);
+        this.deckCards = new ArrayDeque<>(cardsCopy);
     }
 
-    public Card draw() {
-        return cards.pop();
+    public CardHand draw(final int cardCount) {
+        validateDrawSize(cardCount);
+        List<Card> drawCards = new ArrayList<>();
+        for(int i = 0; i< cardCount; i ++) {
+            drawCards.add(deckCards.pop());
+        }
+        return CardHand.of(drawCards);
+    }
+
+    private boolean validateDrawSize(final int cardCount) {
+        if(cardCount > deckCards.size() || cardCount <= 0) {
+            throw new IllegalArgumentException("[err] draw cards out of range");
+        }
+        return true;
     }
 }

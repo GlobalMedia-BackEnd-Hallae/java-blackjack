@@ -1,6 +1,5 @@
 package gmbs.model.players;
 
-import gmbs.model.Card;
 import gmbs.model.CardHand;
 
 public class Dealer implements Player {
@@ -12,8 +11,8 @@ public class Dealer implements Player {
     }
 
     @Override
-    public Dealer hit(Card card) {
-        return new Dealer(CardHand.from(this.cards, card));
+    public Dealer draw(CardHand drawCards) {
+        return new Dealer(CardHand.from(this.cards, drawCards));
     }
 
     @Override
