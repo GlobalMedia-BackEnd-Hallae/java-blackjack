@@ -2,6 +2,9 @@ package gmbs.model;
 
 import gmbs.model.black_jack_enum.BlackJackValue;
 import gmbs.model.black_jack_enum.CardSuits;
+import gmbs.model.players.Dealer;
+import gmbs.model.players.Player;
+import gmbs.model.players.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,35 +17,62 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class HandCalculatorTest {
 
+    private static final Card king = new Card(CardSuits.SPADE, BlackJackValue.KING);
+    private static final Card ace = new Card(CardSuits.SPADE, BlackJackValue.ACE);
+    private static final Card seven = new Card(CardSuits.SPADE, BlackJackValue.SEVEN);
+    private static final Card six = new Card(CardSuits.SPADE, BlackJackValue.SIX);
+    private static final HandCalculator calculator = new HandCalculator();
+
+    @ParameterizedTest
+    @DisplayName("player를 인자로 받아 갖고 있는 card를 확인하여 hit 할 수 있는지 확인")
+    @MethodSource("playerHit")
+    void canHit(Player player, boolean expected) {
+        //when
+        boolean actual = calculator.canHit(player);
+        //then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> playerHit() {
+        return Stream.of(
+                Arguments.of(createDealer(List.of(king, seven)), false),
+                Arguments.of(createDealer(List.of(king, six)), true),
+                Arguments.of(createDealer(List.of(king, ace)), false),
+                Arguments.of(createUser(List.of(king, seven)), true),
+                Arguments.of(createUser(List.of(king, six)), true),
+                Arguments.of(createUser(List.of(king, ace)), false)
+        );
+    }
+
     @ParameterizedTest
     @DisplayName("player 손패의 카드 합을 계산한다")
     @MethodSource("hands")
-    void handSum(CardHand hand, int cardSumExpected) {
-        //given
-        HandCalculator calculator = new HandCalculator();
+    void handSum(Player player, int cardSumExpected) {
         //when
-        int actual = calculator.sumHand(hand);
+        int actual = calculator.sumHand(player);
         //then
         assertThat(actual).isEqualTo(cardSumExpected);
     }
 
     private static Stream<Arguments> hands() {
-        Card spadeAce = new Card(CardSuits.SPADE, BlackJackValue.ACE);
-        Card heartAce = new Card(CardSuits.HEART, BlackJackValue.ACE);
-        Card diamondAce = new Card(CardSuits.DIAMOND, BlackJackValue.ACE);
-        Card clubAce = new Card(CardSuits.CLUB, BlackJackValue.ACE);
-        Card spadeQueen = new Card(CardSuits.SPADE, BlackJackValue.QUEEN);
-        Card spadeKing = new Card(CardSuits.SPADE, BlackJackValue.KING);
-        Card spadeSix = new Card(CardSuits.SPADE, BlackJackValue.SIX);
         return Stream.of(
-                Arguments.of(CardHand.of(List.of(spadeAce, heartAce)), 12),
-                Arguments.of(CardHand.of(List.of(spadeAce, heartAce ,spadeQueen)), 12),
-                Arguments.of(CardHand.of(List.of(spadeAce, spadeQueen)), 21),
-                Arguments.of(CardHand.of(List.of(spadeAce, heartAce, diamondAce, clubAce)), 14),
-                Arguments.of(CardHand.of(List.of(spadeKing, spadeQueen, spadeSix)), 26),
-                Arguments.of(CardHand.of(List.of(spadeKing, spadeQueen, spadeAce)), 21),
-                Arguments.of(CardHand.of(List.of(spadeKing, spadeQueen)), 20),
-                Arguments.of(CardHand.of(List.of(spadeAce, spadeSix)), 17)
-                );
+                Arguments.of(createDealer(List.of(six, six)), 12),
+                Arguments.of(createDealer(List.of(ace, king)), 21),
+                Arguments.of(createDealer(List.of(ace, ace, six)), 18),
+                Arguments.of(createUser(List.of(ace, ace, ace, six)), 19),
+                Arguments.of(createDealer(List.of(ace, ace, ace, ace)), 14),
+                Arguments.of(createUser(List.of(king, king, six)), 26),
+                Arguments.of(createUser(List.of(king, king, ace)), 21),
+                Arguments.of(createUser(List.of(ace, six)), 17)
+
+        );
+    }
+
+    private static Dealer createDealer(List<Card> cards) {
+        return new Dealer(CardHand.of(cards));
+    }
+
+    private static User createUser(List<Card> cards) {
+        return new User("testUser", CardHand.of(cards));
     }
 }

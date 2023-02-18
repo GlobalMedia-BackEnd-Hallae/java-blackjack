@@ -2,6 +2,8 @@ package gmbs.model;
 
 
 import gmbs.model.black_jack_enum.BlackJackValue;
+import gmbs.model.players.Player;
+import gmbs.model.players.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +12,29 @@ import java.util.OptionalInt;
 public class HandCalculator {
 
     private static final int BLACK_JACK = 21;
+    private static final int DEALER_HIT_THRESHOLD = 16;
     private static final int SMALLER_ACE_VALUE = BlackJackValue.ACE.value();
     private static final int BIGGER_ACE_VALUE = BlackJackValue.ACE.alternativeValue();
+
+    public boolean canHit(Player player) {
+        int sumHand = sumHand(player);
+        if (isUser(player)) {
+            return canUserHit(sumHand);
+        }
+        return canDealerHit(sumHand);
+    }
+
+    private boolean isUser(Player player) {
+        return player.getClass() == User.class;
+    }
+
+    private boolean canUserHit(int cardSum) {
+        return cardSum < BLACK_JACK;
+    }
+
+    private boolean canDealerHit(int cardSum) {
+        return cardSum <= DEALER_HIT_THRESHOLD;
+    }
 
     public int sumHand(CardHand hand) {
         if (hand.aceCount() > 0) {
@@ -19,6 +42,15 @@ public class HandCalculator {
         }
         return sumNoAceHand(hand);
     }
+
+    public int sumHand(Player player) {
+        CardHand hand = player.getCardHand();
+        if (hand.aceCount() > 0) {
+            return sumHandWithAce(hand);
+        }
+        return sumNoAceHand(hand);
+    }
+
 
     private int sumNoAceHand(CardHand hand) {
         return hand.getCards()
@@ -52,12 +84,12 @@ public class HandCalculator {
     private OptionalInt sumWithAce(int sumWithoutAce, List<Integer> possibleAceSum) {
         return possibleAceSum.stream()
                 .map(sumAce -> sumAce + sumWithoutAce)
-                .filter(sum -> !isBust(sum))
+                .filter(sum -> !isBustValue(sum))
                 .mapToInt(Integer::intValue)
                 .max();
     }
 
-    private boolean isBust(int sumValue) {
+    private boolean isBustValue(int sumValue) {
         return sumValue > BLACK_JACK;
     }
 
