@@ -29,15 +29,15 @@ class HandCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("player를 인자로 받아 갖고 있는 card를 확인하여 hit 할 수 있는지 확인")
-    @MethodSource("playerHit")
-    void canHit(Player player, boolean expected) {
+    @MethodSource("playersHit")
+    void canHit(final Player player, final boolean expected) {
         //when
         boolean actual = calculator.canHit(player);
         //then
         assertThat(actual).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> playerHit() {
+    private static Stream<Arguments> playersHit() {
         return Stream.of(
                 Arguments.of(createDealer(List.of(king, seven)), false),
                 Arguments.of(createDealer(List.of(king, six)), true),
@@ -51,15 +51,15 @@ class HandCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("player 손패의 카드 합을 계산한다")
-    @MethodSource("hands")
-    void handSum(Player player, int cardSumExpected) {
+    @MethodSource("playersSum")
+    void handSum(final Player player, final int cardSumExpected) {
         //when
         int actual = calculator.sumHand(player);
         //then
         assertThat(actual).isEqualTo(cardSumExpected);
     }
 
-    private static Stream<Arguments> hands() {
+    private static Stream<Arguments> playersSum() {
         return Stream.of(
                 Arguments.of(createDealer(List.of(six, six)), 12),
                 Arguments.of(createDealer(List.of(ace, king)), 21),
@@ -73,11 +73,11 @@ class HandCalculatorTest {
         );
     }
 
-    private static Dealer createDealer(List<Card> cards) {
+    private static Dealer createDealer(final List<Card> cards) {
         return new Dealer(CardHand.of(cards));
     }
 
-    private static User createUser(List<Card> cards) {
+    private static User createUser(final List<Card> cards) {
         return new User(new UserName("testUser"), CardHand.of(cards));
     }
 }

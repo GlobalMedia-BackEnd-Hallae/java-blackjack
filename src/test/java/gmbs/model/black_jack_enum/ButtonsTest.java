@@ -14,7 +14,7 @@ class ButtonsTest {
     @ParameterizedTest
     @DisplayName("inputValue에 따른 inputs 를 반환")
     @MethodSource("inputs")
-    void find(String input, Buttons expected) {
+    void find(final String input, final Buttons expected) {
         //when
         Buttons actual = Buttons.find(input);
         //then

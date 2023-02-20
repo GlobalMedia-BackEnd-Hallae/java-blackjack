@@ -14,7 +14,7 @@ class ResultTest {
     @ParameterizedTest
     @DisplayName("win lose draw 의 상대 결과를 반환")
     @MethodSource("results")
-    void getOpponent(Result selfResult, Result opponentResultExpected) {
+    void getOpponent(final Result selfResult, final Result opponentResultExpected) {
         //when
         Result actual = selfResult.getOpponent();
         //then

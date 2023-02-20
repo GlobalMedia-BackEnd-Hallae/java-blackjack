@@ -35,7 +35,7 @@ class WinnerCheckerTest {
     @ParameterizedTest
     @DisplayName("target과 opponent 를 비교하여 opponent의 결과를 반환")
     @MethodSource("hands")
-    void getResult(CardHand dealerHand, CardHand userHand, BlackJackResult expected) {
+    void getResult(final CardHand dealerHand, final CardHand userHand, final BlackJackResult expected) {
         //given
         Dealer target = new Dealer(dealerHand);
         User opponent = new User(new UserName("user"), userHand);

@@ -25,7 +25,7 @@ class PlayerTest {
     @ParameterizedTest
     @DisplayName("card를 인자로 받아 hit하면 인자로 받은 card를 포함하는 Player를 생성")
     @MethodSource("players")
-    void hit(Player player) {
+    void hit(final Player player) {
         //when
         CardHand afterHitHand = player.draw(hitDraw)
                 .getCardHand();
