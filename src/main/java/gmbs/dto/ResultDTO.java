@@ -24,16 +24,41 @@ public class ResultDTO {
     }
 
     private String extractResults(BlackJackResult result) {
+        if(hasSingleResult(result)) {
+            return extractSingleResult(result);
+        }
+        return extractMultipleResult(result);
+    }
+
+    private boolean hasSingleResult(BlackJackResult result) {
         return result.getResultsData()
                 .entrySet()
                 .stream()
                 .filter(a -> a.getValue() > 0)
-                .map(extractResult())
+                .toList()
+                .size() == 1;
+    }
+
+    private static String extractSingleResult(BlackJackResult result) {
+        return result.getResultsData()
+                .entrySet()
+                .stream()
+                .filter(a -> a.getValue() > 0)
+                .map(entry -> entry.getKey().getDescription())
                 .collect(Collectors.joining());
     }
 
-    private static Function<Map.Entry<Result, Integer>, String> extractResult() {
-        return a -> a.getValue().toString() + a.getKey().getDescription();
+    private static String extractMultipleResult(BlackJackResult result) {
+        return result.getResultsData()
+                .entrySet()
+                .stream()
+                .filter(a -> a.getValue() > 0)
+                .map(getResultWithValue())
+                .collect(Collectors.joining());
+    }
+
+    private static Function<Map.Entry<Result, Integer>, String> getResultWithValue() {
+        return entry -> entry.getValue().toString() + entry.getKey().getDescription();
     }
 
     private String extractCards(Player player) {
