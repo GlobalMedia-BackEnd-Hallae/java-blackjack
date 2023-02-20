@@ -25,7 +25,7 @@ public class WinnerChecker {
         int opponentSumHand = calculator.sumHand(opponent.getCardHand());
         Result opponentResult = getResultByValue(opponentSumHand);
         addComparisonTargetResults(opponentResult);
-        return new BlackJackResult(opponentResult, opponentSumHand);
+        return BlackJackResult.singleResultFrom(opponentResult, opponentSumHand);
     }
 
     private Result getResultByValue(int userHandValue) {
@@ -60,7 +60,7 @@ public class WinnerChecker {
         targetResults.replace(targetResult, targetResults.get(targetResult) + 1);
     }
 
-    public Map<Result, Integer> getTargetResults() {
-        return targetResults;
+    public BlackJackResult getTargetResult() {
+        return BlackJackResult.resultsFrom(targetResults, targetHandValue);
     }
 }

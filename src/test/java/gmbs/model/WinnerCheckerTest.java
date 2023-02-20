@@ -44,13 +44,13 @@ class WinnerCheckerTest {
 
     private static Stream<Arguments> hands() {
         return Stream.of(
-                Arguments.of(blackJack, blackJack, new BlackJackResult(Result.DRAW, 21)),
-                Arguments.of(bust, blackJack, new BlackJackResult(Result.WIN, 21)),
-                Arguments.of(bust, bust, new BlackJackResult(Result.DRAW, 26)),
-                Arguments.of(bust, sixteen, new BlackJackResult(Result.WIN, 16)),
-                Arguments.of(sixteen, bust, new BlackJackResult(Result.LOSE, 26)),
-                Arguments.of(sixteen, twelve, new BlackJackResult(Result.LOSE, 12)),
-                Arguments.of(twelve, sixteen, new BlackJackResult(Result.WIN, 16))
+                Arguments.of(blackJack, blackJack, BlackJackResult.singleResultFrom(Result.DRAW, 21)),
+                Arguments.of(bust, blackJack, BlackJackResult.singleResultFrom(Result.WIN, 21)),
+                Arguments.of(bust, bust, BlackJackResult.singleResultFrom(Result.DRAW, 26)),
+                Arguments.of(bust, sixteen, BlackJackResult.singleResultFrom(Result.WIN, 16)),
+                Arguments.of(sixteen, bust, BlackJackResult.singleResultFrom(Result.LOSE, 26)),
+                Arguments.of(sixteen, twelve, BlackJackResult.singleResultFrom(Result.LOSE, 12)),
+                Arguments.of(twelve, sixteen, BlackJackResult.singleResultFrom(Result.WIN, 16))
         );
     }
 
@@ -67,7 +67,8 @@ class WinnerCheckerTest {
         checker.getResult(loseUser);
         checker.getResult(drawUser);
         //when
-        Map<Result, Integer> targetResult = checker.getTargetResults();
+        Map<Result, Integer> targetResult = checker.getTargetResult()
+                .getResultsData();
         //then
         assertThat(targetResult).containsEntry(Result.WIN, 1)
                 .containsEntry(Result.LOSE, 1)
