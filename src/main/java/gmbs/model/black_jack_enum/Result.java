@@ -1,9 +1,9 @@
 package gmbs.model.black_jack_enum;
 
 public enum Result {
-    WIN("win"),
-    LOSE("lose"),
-    DRAW("draw");
+    WIN("승"),
+    LOSE("패"),
+    DRAW("무");
 
     private final String description;
 
