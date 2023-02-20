@@ -2,7 +2,7 @@ package gmbs.model.black_jack_enum;
 
 import java.util.Arrays;
 
-public enum Inputs {
+public enum Buttons {
 
     YES("y"),
     NO("n"),
@@ -10,12 +10,12 @@ public enum Inputs {
 
     private final String inputValue;
 
-    Inputs(final String input) {
+    Buttons(final String input) {
         this.inputValue = input;
     }
 
-    public static Inputs find(final String target) {
-        return Arrays.stream(Inputs.values())
+    public static Buttons find(final String target) {
+        return Arrays.stream(Buttons.values())
                 .filter(input->input.inputValue.equals(target))
                 .findAny()
                 .orElse(WRONG);
