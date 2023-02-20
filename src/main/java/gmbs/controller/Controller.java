@@ -4,6 +4,7 @@ import gmbs.dto.PlayerDTO;
 import gmbs.dto.ResultDTO;
 import gmbs.model.*;
 import gmbs.model.players.Player;
+import gmbs.model.vo.UserInput;
 import gmbs.view.Input;
 import gmbs.view.Output;
 

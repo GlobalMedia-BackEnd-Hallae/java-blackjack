@@ -1,6 +1,8 @@
-package gmbs.model;
+package gmbs.model.vo;
 
 import gmbs.model.black_jack_enum.Buttons;
+
+import java.util.Objects;
 
 public class UserInput {
 
@@ -19,5 +21,18 @@ public class UserInput {
 
     public boolean isYes() {
         return input.equals(Buttons.YES);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserInput userInput = (UserInput) o;
+        return input == userInput.input;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(input);
     }
 }
