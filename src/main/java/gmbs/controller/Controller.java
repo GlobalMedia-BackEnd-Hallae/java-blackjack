@@ -1,8 +1,7 @@
 package gmbs.controller;
 
-import gmbs.dto.DealerDTO;
+import gmbs.dto.PlayerDTO;
 import gmbs.dto.ResultDTO;
-import gmbs.dto.UserDTO;
 import gmbs.model.*;
 import gmbs.model.players.Player;
 import gmbs.view.Input;
@@ -57,8 +56,8 @@ public class Controller {
     }
 
     private void showFirstStatus(final List<Player> users, final Player dealer) {
-        output.showPlayerInfo(DealerDTO.oneCardOf(dealer));
-        users.forEach(user -> output.showPlayerInfo(UserDTO.of(user)));
+        output.showPlayerInfo(PlayerDTO.oneCardOf(dealer));
+        users.forEach(user -> output.showPlayerInfo(PlayerDTO.allCardOf(user)));
     }
 
     private List<Player> usersHit(final List<Player> users) {
@@ -71,7 +70,7 @@ public class Controller {
         Player afterHit = user;
         while (calculator.canHit(afterHit) && isYes(afterHit)) {
             afterHit = manager.hit(afterHit);
-            output.showPlayerInfo(UserDTO.of(afterHit));
+            output.showPlayerInfo(PlayerDTO.allCardOf(afterHit));
         }
         return afterHit;
     }

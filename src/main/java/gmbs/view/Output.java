@@ -1,7 +1,7 @@
 package gmbs.view;
 
-import gmbs.dto.PlayerDTO;
 import gmbs.dto.ResultDTO;
+import gmbs.dto.PlayerDTO;
 
 public class Output {
 
