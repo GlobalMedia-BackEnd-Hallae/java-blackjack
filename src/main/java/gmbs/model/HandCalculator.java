@@ -63,11 +63,7 @@ public class HandCalculator {
     private int sumHandWithAce(CardHand hand) {
         int sumWithoutAce = sumWithoutAce(hand);
         List<Integer> possibleAceSum = possibleSumAce(hand.aceCount());
-        OptionalInt sum = sumWithAce(sumWithoutAce, possibleAceSum);
-        if (sum.isPresent()) {
-            return sum.getAsInt();
-        }
-        throw new IllegalArgumentException("[err] hand already busted");
+        return sumWithAce(sumWithoutAce, possibleAceSum);
     }
 
     private int sumWithoutAce(CardHand hand) {
@@ -81,7 +77,27 @@ public class HandCalculator {
                 .sum();
     }
 
-    private OptionalInt sumWithAce(int sumWithoutAce, List<Integer> possibleAceSum) {
+    private int sumWithAce(int sumWithoutAce, List<Integer> possibleAceSum) {
+        OptionalInt noBustMax = getNoBustMax(sumWithoutAce, possibleAceSum);
+        OptionalInt bustMin = getBustMin(sumWithoutAce, possibleAceSum);
+        if (noBustMax.isPresent()) {
+            return noBustMax.getAsInt();
+        }
+        if (bustMin.isPresent()) {
+            return bustMin.getAsInt();
+        }
+        throw new IllegalArgumentException("[err] no sum value");
+    }
+
+    private OptionalInt getBustMin(int sumWithoutAce, List<Integer> possibleAceSum) {
+        return possibleAceSum.stream()
+                .map(sumAce -> sumAce + sumWithoutAce)
+                .filter(this::isBustValue)
+                .mapToInt(Integer::intValue)
+                .min();
+    }
+
+    private OptionalInt getNoBustMax(int sumWithoutAce, List<Integer> possibleAceSum) {
         return possibleAceSum.stream()
                 .map(sumAce -> sumAce + sumWithoutAce)
                 .filter(sum -> !isBustValue(sum))

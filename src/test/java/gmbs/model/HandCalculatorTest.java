@@ -21,6 +21,7 @@ class HandCalculatorTest {
     private static final Card ace = new Card(CardSuits.SPADE, BlackJackValue.ACE);
     private static final Card seven = new Card(CardSuits.SPADE, BlackJackValue.SEVEN);
     private static final Card six = new Card(CardSuits.SPADE, BlackJackValue.SIX);
+    private static final Card two = new Card(CardSuits.SPADE, BlackJackValue.TWO);
     private static final HandCalculator calculator = new HandCalculator();
 
     @ParameterizedTest
@@ -40,6 +41,7 @@ class HandCalculatorTest {
                 Arguments.of(createDealer(List.of(king, ace)), false),
                 Arguments.of(createUser(List.of(king, seven)), true),
                 Arguments.of(createUser(List.of(king, six)), true),
+                Arguments.of(createUser(List.of(king, king)), true),
                 Arguments.of(createUser(List.of(king, ace)), false)
         );
     }
@@ -63,8 +65,8 @@ class HandCalculatorTest {
                 Arguments.of(createDealer(List.of(ace, ace, ace, ace)), 14),
                 Arguments.of(createUser(List.of(king, king, six)), 26),
                 Arguments.of(createUser(List.of(king, king, ace)), 21),
-                Arguments.of(createUser(List.of(ace, six)), 17)
-
+                Arguments.of(createUser(List.of(ace, six)), 17),
+                Arguments.of(createUser(List.of(two, two, two, ace, king, king)), 27)
         );
     }
 
