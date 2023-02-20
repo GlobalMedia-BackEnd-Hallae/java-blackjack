@@ -5,6 +5,8 @@ import gmbs.model.black_jack_enum.CardSuits;
 import gmbs.model.black_jack_enum.Result;
 import gmbs.model.players.Dealer;
 import gmbs.model.players.User;
+import gmbs.model.vo.BlackJackResult;
+import gmbs.model.vo.Card;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

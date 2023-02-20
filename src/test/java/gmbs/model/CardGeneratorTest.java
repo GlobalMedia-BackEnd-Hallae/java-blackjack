@@ -1,5 +1,6 @@
 package gmbs.model;
 
+import gmbs.model.vo.Card;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

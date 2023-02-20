@@ -1,7 +1,7 @@
 package gmbs.dto;
 
-import gmbs.model.BlackJackResult;
-import gmbs.model.Card;
+import gmbs.model.vo.BlackJackResult;
+import gmbs.model.vo.Card;
 import gmbs.model.black_jack_enum.Result;
 import gmbs.model.players.Player;
 

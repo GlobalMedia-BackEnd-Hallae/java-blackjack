@@ -1,5 +1,7 @@
 package gmbs.model;
 
+import gmbs.model.vo.Card;
+
 import java.util.*;
 
 public class Deck {

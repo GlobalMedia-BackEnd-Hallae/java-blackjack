@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Controller {
-    
+
     private static final String SPLIT_VALUE = ",";
     private final Input input = new Input();
     private final Output output = new Output();

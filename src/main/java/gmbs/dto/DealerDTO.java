@@ -1,6 +1,6 @@
 package gmbs.dto;
 
-import gmbs.model.Card;
+import gmbs.model.vo.Card;
 import gmbs.model.players.Player;
 
 import java.util.List;

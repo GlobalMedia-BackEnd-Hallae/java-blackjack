@@ -1,4 +1,4 @@
-package gmbs.model;
+package gmbs.model.vo;
 
 import gmbs.model.black_jack_enum.BlackJackValue;
 import gmbs.model.black_jack_enum.CardSuits;

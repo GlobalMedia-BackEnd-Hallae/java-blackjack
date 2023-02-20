@@ -2,6 +2,7 @@ package gmbs.model;
 
 import gmbs.model.black_jack_enum.BlackJackValue;
 import gmbs.model.black_jack_enum.CardSuits;
+import gmbs.model.vo.Card;
 
 import java.util.Arrays;
 import java.util.Collection;

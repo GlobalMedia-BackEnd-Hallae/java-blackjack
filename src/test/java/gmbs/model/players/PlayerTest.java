@@ -1,6 +1,6 @@
 package gmbs.model.players;
 
-import gmbs.model.Card;
+import gmbs.model.vo.Card;
 import gmbs.model.CardHand;
 import gmbs.model.UserName;
 import gmbs.model.black_jack_enum.BlackJackValue;

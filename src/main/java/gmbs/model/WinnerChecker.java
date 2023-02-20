@@ -2,6 +2,7 @@ package gmbs.model;
 
 import gmbs.model.black_jack_enum.Result;
 import gmbs.model.players.Player;
+import gmbs.model.vo.BlackJackResult;
 
 import java.util.Arrays;
 import java.util.Map;
