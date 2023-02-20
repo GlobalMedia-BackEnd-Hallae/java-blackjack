@@ -18,16 +18,15 @@ public class Deck {
     public CardHand draw(final int cardCount) {
         validateDrawSize(cardCount);
         List<Card> drawCards = new ArrayList<>();
-        for(int i = 0; i< cardCount; i ++) {
+        for (int i = 0; i < cardCount; i++) {
             drawCards.add(deckCards.pop());
         }
         return CardHand.of(drawCards);
     }
 
-    private boolean validateDrawSize(final int cardCount) {
-        if(cardCount > deckCards.size() || cardCount <= 0) {
+    private void validateDrawSize(final int cardCount) {
+        if (cardCount > deckCards.size() || cardCount <= 0) {
             throw new IllegalArgumentException("[err] draw cards out of range");
         }
-        return true;
     }
 }
