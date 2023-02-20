@@ -2,6 +2,7 @@ package gmbs.model.players;
 
 import gmbs.model.Card;
 import gmbs.model.CardHand;
+import gmbs.model.UserName;
 import gmbs.model.black_jack_enum.BlackJackValue;
 import gmbs.model.black_jack_enum.CardSuits;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +22,7 @@ class UserTest {
         Card secondCard = new Card(CardSuits.HEART, BlackJackValue.ACE);
         CardHand beforeHitHand = CardHand.of(List.of(firstCard, secondCard));
         CardHand hitDraw = CardHand.of(List.of(new Card(CardSuits.DIAMOND, BlackJackValue.ACE)));
-        User user = new User("user", beforeHitHand);
+        User user = new User(new UserName("user"), beforeHitHand);
         //when
         CardHand afterHitHand = user.draw(hitDraw)
                 .getCardHand();

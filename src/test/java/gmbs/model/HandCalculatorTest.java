@@ -75,6 +75,6 @@ class HandCalculatorTest {
     }
 
     private static User createUser(List<Card> cards) {
-        return new User("testUser", CardHand.of(cards));
+        return new User(new UserName("testUser"), CardHand.of(cards));
     }
 }

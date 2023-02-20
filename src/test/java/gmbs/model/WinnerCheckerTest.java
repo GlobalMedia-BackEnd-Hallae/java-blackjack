@@ -34,7 +34,7 @@ class WinnerCheckerTest {
     void getResult(CardHand dealerHand, CardHand userHand, BlackJackResult expected) {
         //given
         Dealer target = new Dealer(dealerHand);
-        User opponent = new User("user", userHand);
+        User opponent = new User(new UserName("user"), userHand);
         WinnerChecker checker = new WinnerChecker(target);
         //when
         BlackJackResult actual = checker.getResult(opponent);
@@ -58,10 +58,11 @@ class WinnerCheckerTest {
     @DisplayName("target의 상대player에 따른 결과들을 비교하여 반환")
     void getComparisonTargetResults() {
         //given
+        UserName name = new UserName("any");
         Dealer target = new Dealer(sixteen);
-        User winUser = new User("win", blackJack);
-        User loseUser = new User("lose", twelve);
-        User drawUser = new User("draw", sixteen);
+        User winUser = new User(name, blackJack);
+        User loseUser = new User(name, twelve);
+        User drawUser = new User(name, sixteen);
         WinnerChecker checker = new WinnerChecker(target);
         checker.getResult(winUser);
         checker.getResult(loseUser);

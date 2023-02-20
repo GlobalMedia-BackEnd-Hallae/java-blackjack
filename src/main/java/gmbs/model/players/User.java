@@ -1,13 +1,14 @@
 package gmbs.model.players;
 
 import gmbs.model.CardHand;
+import gmbs.model.UserName;
 
 public class User implements Player {
 
-    private final String name;
+    private final UserName name;
     private final CardHand cardHand;
 
-    public User(final String name, final CardHand cardHand) {
+    public User(final UserName name, final CardHand cardHand) {
         this.name = name;
         this.cardHand = cardHand;
     }
@@ -24,6 +25,6 @@ public class User implements Player {
 
     @Override
     public String getName() {
-        return name;
+        return name.getName();
     }
 }
