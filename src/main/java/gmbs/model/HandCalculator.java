@@ -35,8 +35,8 @@ public class HandCalculator {
 
     private int sumHandWithAce(CardHand hand) {
         int sumWithoutAce = sumWithoutAce(hand);
-        List<Integer> possibleAceSum = possibleSumAce(hand.aceCount());
-        return sumWithAce(sumWithoutAce, possibleAceSum);
+        List<Integer> possibleAceSums = possibleSumsWithAce(hand.aceCount());
+        return sumWithAce(sumWithoutAce, possibleAceSums);
     }
 
     private int sumWithoutAce(CardHand hand) {
@@ -48,11 +48,11 @@ public class HandCalculator {
                 .sum();
     }
 
-    private List<Integer> possibleSumAce(int aceCount) {
+    private List<Integer> possibleSumsWithAce(int aceCount) {
         if (aceCount == 1) {
             return List.of(SMALLER_ACE_VALUE, BIGGER_ACE_VALUE);
         }
-        List<Integer> previousDegree = possibleSumAce(aceCount - 1);
+        List<Integer> previousDegree = possibleSumsWithAce(aceCount - 1);
         return getCurrentDegree(previousDegree);
     }
 
