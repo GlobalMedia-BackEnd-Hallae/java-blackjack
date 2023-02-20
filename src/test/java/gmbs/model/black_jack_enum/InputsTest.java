@@ -14,18 +14,18 @@ class InputsTest {
     @ParameterizedTest
     @DisplayName("inputValue에 따른 inputs 를 반환")
     @MethodSource("inputs")
-    void find(String input, Inputs expected) {
+    void find(String input, Buttons expected) {
         //when
-        Inputs actual = Inputs.find(input);
+        Buttons actual = Buttons.find(input);
         //then
         assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> inputs() {
         return Stream.of(
-                Arguments.of("y", Inputs.YES),
-                Arguments.of("n", Inputs.NO),
-                Arguments.of("not y/n", Inputs.WRONG)
+                Arguments.of("y", Buttons.YES),
+                Arguments.of("n", Buttons.NO),
+                Arguments.of("not y/n", Buttons.WRONG)
         );
     }
 }
