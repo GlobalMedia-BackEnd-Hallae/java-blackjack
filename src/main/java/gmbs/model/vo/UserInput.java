@@ -13,7 +13,7 @@ public class UserInput {
         this.input = Buttons.find(input);
     }
 
-    public void validateWrongInput(final String string) {
+    private void validateWrongInput(final String string) {
         if(Buttons.find(string).equals(Buttons.WRONG)) {
             throw new IllegalArgumentException("[err] wrong input");
         }
