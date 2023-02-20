@@ -33,7 +33,7 @@ public enum BlackJackValue {
     }
 
     public int alternativeValue() {
-        if(!hasAlternativeValue) {
+        if (!hasAlternativeValue) {
             throw new IllegalArgumentException("[err] has no alternative value");
         }
         return alternativeValue;

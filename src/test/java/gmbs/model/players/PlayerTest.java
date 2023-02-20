@@ -37,6 +37,6 @@ class PlayerTest {
         return Stream.of(
                 Arguments.of(new User(new UserName("user"), beforeHitHand)),
                 Arguments.of(new Dealer(beforeHitHand))
-                );
+        );
     }
 }

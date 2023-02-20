@@ -16,7 +16,7 @@ public enum Buttons {
 
     public static Buttons find(final String target) {
         return Arrays.stream(Buttons.values())
-                .filter(input->input.inputValue.equals(target))
+                .filter(input -> input.inputValue.equals(target))
                 .findAny()
                 .orElse(WRONG);
     }

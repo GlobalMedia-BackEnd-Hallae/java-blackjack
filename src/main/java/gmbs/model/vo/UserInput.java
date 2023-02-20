@@ -14,7 +14,7 @@ public class UserInput {
     }
 
     private void validateWrongInput(final String string) {
-        if(Buttons.find(string).equals(Buttons.WRONG)) {
+        if (Buttons.find(string).equals(Buttons.WRONG)) {
             throw new IllegalArgumentException("[err] wrong input");
         }
     }

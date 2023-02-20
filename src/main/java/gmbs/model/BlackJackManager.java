@@ -24,7 +24,7 @@ public class BlackJackManager {
     }
 
     private void validateCanHit(final Player player) {
-        if(!calculator.canHit(player)) {
+        if (!calculator.canHit(player)) {
             throw new IllegalArgumentException("[err] can't hit");
         }
     }

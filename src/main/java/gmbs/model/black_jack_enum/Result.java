@@ -16,10 +16,10 @@ public enum Result {
     }
 
     public Result getOpponent() {
-        if(this.equals(WIN)) {
+        if (this.equals(WIN)) {
             return LOSE;
         }
-        if(this.equals(LOSE)) {
+        if (this.equals(LOSE)) {
             return WIN;
         }
         return DRAW;

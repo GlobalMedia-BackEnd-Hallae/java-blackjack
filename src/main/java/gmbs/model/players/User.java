@@ -15,7 +15,7 @@ public class User implements Player {
 
     @Override
     public User draw(final CardHand drawCards) {
-       return new User(this.name, CardHand.from(this.cardHand, drawCards));
+        return new User(this.name, CardHand.from(this.cardHand, drawCards));
     }
 
     @Override
