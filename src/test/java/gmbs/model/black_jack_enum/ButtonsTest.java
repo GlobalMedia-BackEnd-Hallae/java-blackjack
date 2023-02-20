@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class InputsTest {
+class ButtonsTest {
 
     @ParameterizedTest
     @DisplayName("inputValue에 따른 inputs 를 반환")
