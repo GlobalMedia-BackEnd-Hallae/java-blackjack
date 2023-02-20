@@ -4,7 +4,9 @@ import gmbs.model.CardHand;
 
 public interface Player {
 
-    Player draw(CardHand drawHand);
+    Player draw(final CardHand drawHand);
+
     CardHand getCardHand();
 
+    String getName();
 }
