@@ -16,7 +16,7 @@ public class HandCalculator {
     private static final int SMALLER_ACE_VALUE = BlackJackValue.ACE.value();
     private static final int BIGGER_ACE_VALUE = BlackJackValue.ACE.alternativeValue();
 
-    public boolean canHit(Player player) {
+    public boolean canHit(final Player player) {
         int sumHand = sumHand(player);
         if (isUser(player)) {
             return canUserHit(sumHand);
@@ -24,40 +24,12 @@ public class HandCalculator {
         return canDealerHit(sumHand);
     }
 
-    private boolean isUser(Player player) {
-        return player.getClass() == User.class;
-    }
-
-    private boolean canUserHit(int cardSum) {
-        return cardSum < BLACK_JACK;
-    }
-
-    private boolean canDealerHit(int cardSum) {
-        return cardSum <= DEALER_HIT_THRESHOLD;
-    }
-
-    public int sumHand(CardHand hand) {
-        if (hand.aceCount() > 0) {
-            return sumHandWithAce(hand);
-        }
-        return sumNoAceHand(hand);
-    }
-
-    public int sumHand(Player player) {
+    public int sumHand(final Player player) {
         CardHand hand = player.getCardHand();
         if (hand.aceCount() > 0) {
             return sumHandWithAce(hand);
         }
         return sumNoAceHand(hand);
-    }
-
-
-    private int sumNoAceHand(CardHand hand) {
-        return hand.getCards()
-                .stream()
-                .map(card -> card.getCardValue().value())
-                .mapToInt(Integer::intValue)
-                .sum();
     }
 
     private int sumHandWithAce(CardHand hand) {
@@ -73,38 +45,6 @@ public class HandCalculator {
                 .map(card -> card.getCardValue().value())
                 .mapToInt(Integer::intValue)
                 .sum();
-    }
-
-    private int sumWithAce(int sumWithoutAce, List<Integer> possibleAceSum) {
-        OptionalInt noBustMax = getNoBustMax(sumWithoutAce, possibleAceSum);
-        OptionalInt bustMin = getBustMin(sumWithoutAce, possibleAceSum);
-        if (noBustMax.isPresent()) {
-            return noBustMax.getAsInt();
-        }
-        if (bustMin.isPresent()) {
-            return bustMin.getAsInt();
-        }
-        throw new IllegalStateException("[err] no sum value");
-    }
-
-    private OptionalInt getBustMin(int sumWithoutAce, List<Integer> possibleAceSum) {
-        return possibleAceSum.stream()
-                .map(sumAce -> sumAce + sumWithoutAce)
-                .filter(this::isBustValue)
-                .mapToInt(Integer::intValue)
-                .min();
-    }
-
-    private OptionalInt getNoBustMax(int sumWithoutAce, List<Integer> possibleAceSum) {
-        return possibleAceSum.stream()
-                .map(sumAce -> sumAce + sumWithoutAce)
-                .filter(sum -> !isBustValue(sum))
-                .mapToInt(Integer::intValue)
-                .max();
-    }
-
-    private boolean isBustValue(int sumValue) {
-        return sumValue > BLACK_JACK;
     }
 
     private List<Integer> possibleSumAce(int aceCount) {
@@ -124,4 +64,57 @@ public class HandCalculator {
         currentDegree.add(currentLastValue);
         return currentDegree;
     }
+
+    private int sumWithAce(int sumWithoutAce, List<Integer> possibleAceSum) {
+        OptionalInt noBustMax = getNoBustMax(sumWithoutAce, possibleAceSum);
+        OptionalInt bustMin = getBustMin(sumWithoutAce, possibleAceSum);
+        if (noBustMax.isPresent()) {
+            return noBustMax.getAsInt();
+        }
+        if (bustMin.isPresent()) {
+            return bustMin.getAsInt();
+        }
+        throw new IllegalStateException("[err] no sum value");
+    }
+
+    private OptionalInt getNoBustMax(int sumWithoutAce, List<Integer> possibleAceSum) {
+        return possibleAceSum.stream()
+                .map(sumAce -> sumAce + sumWithoutAce)
+                .filter(sum -> !isBustValue(sum))
+                .mapToInt(Integer::intValue)
+                .max();
+    }
+
+    private OptionalInt getBustMin(int sumWithoutAce, List<Integer> possibleAceSum) {
+        return possibleAceSum.stream()
+                .map(sumAce -> sumAce + sumWithoutAce)
+                .filter(this::isBustValue)
+                .mapToInt(Integer::intValue)
+                .min();
+    }
+
+    private boolean isBustValue(int sumValue) {
+        return sumValue > BLACK_JACK;
+    }
+
+    private int sumNoAceHand(CardHand hand) {
+        return hand.getCards()
+                .stream()
+                .map(card -> card.getCardValue().value())
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    private boolean isUser(final Player player) {
+        return player.getClass() == User.class;
+    }
+
+    private boolean canUserHit(int cardSum) {
+        return cardSum < BLACK_JACK;
+    }
+
+    private boolean canDealerHit(int cardSum) {
+        return cardSum <= DEALER_HIT_THRESHOLD;
+    }
+
 }

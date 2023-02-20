@@ -17,13 +17,13 @@ public class WinnerChecker {
     private final Map<Result, Integer> targetResults;
 
     public WinnerChecker(Player comparisonTarget) {
-        targetHandValue = calculator.sumHand(comparisonTarget.getCardHand());
+        targetHandValue = calculator.sumHand(comparisonTarget);
         targetResults = Arrays.stream(Result.values())
                 .collect(Collectors.toMap(Function.identity(), ignored -> 0));
     }
 
     public BlackJackResult getResult(Player opponent) {
-        int opponentSumHand = calculator.sumHand(opponent.getCardHand());
+        int opponentSumHand = calculator.sumHand(opponent);
         Result opponentResult = getResultByValue(opponentSumHand);
         addComparisonTargetResults(opponentResult);
         return BlackJackResult.singleResultFrom(opponentResult, opponentSumHand);
