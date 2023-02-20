@@ -14,4 +14,14 @@ public enum Result {
     public String getDescription() {
         return this.description;
     }
+
+    public Result getOpponent() {
+        if(this.equals(WIN)) {
+            return LOSE;
+        }
+        if(this.equals(LOSE)) {
+            return WIN;
+        }
+        return DRAW;
+    }
 }
