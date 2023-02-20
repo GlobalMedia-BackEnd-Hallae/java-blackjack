@@ -2,7 +2,7 @@ package gmbs.model.players;
 
 import gmbs.model.vo.Card;
 import gmbs.model.first_class_collection.CardHand;
-import gmbs.model.UserName;
+import gmbs.model.vo.UserName;
 import gmbs.model.black_jack_enum.BlackJackValue;
 import gmbs.model.black_jack_enum.CardSuits;
 import org.junit.jupiter.api.DisplayName;

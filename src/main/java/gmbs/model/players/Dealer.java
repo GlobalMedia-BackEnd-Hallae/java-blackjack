@@ -1,7 +1,7 @@
 package gmbs.model.players;
 
 import gmbs.model.first_class_collection.CardHand;
-import gmbs.model.UserName;
+import gmbs.model.vo.UserName;
 
 public class Dealer implements Player {
 

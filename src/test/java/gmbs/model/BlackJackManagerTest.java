@@ -7,6 +7,7 @@ import gmbs.model.players.Dealer;
 import gmbs.model.players.Player;
 import gmbs.model.players.User;
 import gmbs.model.vo.Card;
+import gmbs.model.vo.UserName;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
