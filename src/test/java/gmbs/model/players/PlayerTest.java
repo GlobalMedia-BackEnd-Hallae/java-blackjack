@@ -1,7 +1,7 @@
 package gmbs.model.players;
 
 import gmbs.model.vo.Card;
-import gmbs.model.CardHand;
+import gmbs.model.first_class_collection.CardHand;
 import gmbs.model.UserName;
 import gmbs.model.black_jack_enum.BlackJackValue;
 import gmbs.model.black_jack_enum.CardSuits;

@@ -1,6 +1,6 @@
 package gmbs.model.players;
 
-import gmbs.model.CardHand;
+import gmbs.model.first_class_collection.CardHand;
 import gmbs.model.UserName;
 
 public class Dealer implements Player {

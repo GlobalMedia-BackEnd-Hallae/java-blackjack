@@ -2,6 +2,7 @@ package gmbs.model;
 
 
 import gmbs.model.black_jack_enum.BlackJackValue;
+import gmbs.model.first_class_collection.CardHand;
 import gmbs.model.players.Player;
 import gmbs.model.players.User;
 

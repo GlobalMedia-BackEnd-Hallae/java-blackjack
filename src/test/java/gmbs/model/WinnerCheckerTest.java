@@ -3,6 +3,7 @@ package gmbs.model;
 import gmbs.model.black_jack_enum.BlackJackValue;
 import gmbs.model.black_jack_enum.CardSuits;
 import gmbs.model.black_jack_enum.Result;
+import gmbs.model.first_class_collection.CardHand;
 import gmbs.model.players.Dealer;
 import gmbs.model.players.User;
 import gmbs.model.vo.BlackJackResult;

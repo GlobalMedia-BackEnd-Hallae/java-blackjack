@@ -1,5 +1,6 @@
 package gmbs.model;
 
+import gmbs.model.first_class_collection.CardHand;
 import gmbs.model.vo.Card;
 
 import java.util.*;

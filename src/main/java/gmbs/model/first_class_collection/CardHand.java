@@ -1,4 +1,4 @@
-package gmbs.model;
+package gmbs.model.first_class_collection;
 
 import gmbs.model.vo.Card;
 
