@@ -47,7 +47,7 @@ class BlackJackManagerTest {
     }
 
     private static User createUser(final List<Card> cards) {
-        return new User("testUser", CardHand.of(cards));
+        return new User(new UserName("testUser"), CardHand.of(cards));
     }
 
     @Test
@@ -59,6 +59,6 @@ class BlackJackManagerTest {
     @Test
     @DisplayName("user를 생성하는지 확인")
     void createUser() {
-        assertThat(manager.createUser("userName")).isInstanceOf(User.class);
+        assertThat(manager.createUser(new UserName("userName"))).isInstanceOf(User.class);
     }
 }
