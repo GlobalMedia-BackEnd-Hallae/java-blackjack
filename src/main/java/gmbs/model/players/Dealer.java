@@ -1,10 +1,11 @@
 package gmbs.model.players;
 
 import gmbs.model.CardHand;
+import gmbs.model.UserName;
 
 public class Dealer implements Player {
 
-    private static final String NAME = "dealer";
+    private static final UserName name = new UserName("dealer");
     private final CardHand cards;
 
     public Dealer(final CardHand cards) {
@@ -21,8 +22,9 @@ public class Dealer implements Player {
         return cards;
     }
 
+
     @Override
     public String getName() {
-        return NAME;
+        return name.getName();
     }
 }

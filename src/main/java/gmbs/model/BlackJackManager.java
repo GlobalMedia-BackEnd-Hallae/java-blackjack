@@ -31,7 +31,7 @@ public class BlackJackManager {
         return new Dealer(drawFirstHand());
     }
 
-    public User createUser(final String userName) {
+    public User createUser(final UserName userName) {
         return new User(userName, drawFirstHand());
     }
 
