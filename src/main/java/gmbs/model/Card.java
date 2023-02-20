@@ -3,14 +3,13 @@ package gmbs.model;
 import gmbs.model.black_jack_enum.BlackJackValue;
 import gmbs.model.black_jack_enum.CardSuits;
 
-public class Card {
+import java.util.Objects;
 
-    private final CardSuits cardShape;
+public class Card {
     private final BlackJackValue cardValue;
     private final String cardName;
-    
+
     public Card(final CardSuits shape, final BlackJackValue value) {
-        cardShape = shape;
         cardValue = value;
         cardName = shape.getDescription() + value.getDescription();
     }
@@ -19,19 +18,25 @@ public class Card {
         return cardValue;
     }
 
-    public int getNumberValue() {
-        return cardValue.value();
-    }
-
-    public int getAlternativeValue() {
-        return cardValue.alternativeValue();
+    public boolean isAce() {
+        return cardValue.name()
+                .equals("ACE");
     }
 
     public String getName() {
         return cardName;
     }
 
-    public CardSuits getShape() {
-        return cardShape;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return cardValue == card.cardValue && Objects.equals(cardName, card.cardName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardValue, cardName);
     }
 }

@@ -55,7 +55,7 @@ public class HandCalculator {
     private int sumNoAceHand(CardHand hand) {
         return hand.getCards()
                 .stream()
-                .map(Card::getNumberValue)
+                .map(card -> card.getCardValue().value())
                 .mapToInt(Integer::intValue)
                 .sum();
     }
@@ -69,10 +69,8 @@ public class HandCalculator {
     private int sumWithoutAce(CardHand hand) {
         return hand.getCards()
                 .stream()
-                .filter(card -> !card.getCardValue()
-                        .name()
-                        .equals("ACE"))
-                .map(Card::getNumberValue)
+                .filter(card -> !card.isAce())
+                .map(card -> card.getCardValue().value())
                 .mapToInt(Integer::intValue)
                 .sum();
     }
@@ -86,7 +84,7 @@ public class HandCalculator {
         if (bustMin.isPresent()) {
             return bustMin.getAsInt();
         }
-        throw new IllegalArgumentException("[err] no sum value");
+        throw new IllegalStateException("[err] no sum value");
     }
 
     private OptionalInt getBustMin(int sumWithoutAce, List<Integer> possibleAceSum) {
