@@ -9,17 +9,17 @@ public class CardHand {
 
     private final List<Card> cards;
 
-    public static CardHand of(List<Card> cards) {
+    public static CardHand of(final List<Card> cards) {
         return new CardHand(cards);
     }
 
-    public static CardHand from(CardHand presentHand, CardHand drawHand) {
+    public static CardHand from(final CardHand presentHand, CardHand drawHand) {
         List<Card> addedCards = new ArrayList<>(presentHand.getCards());
         addedCards.addAll(drawHand.getCards());
         return new CardHand(addedCards);
     }
 
-    private CardHand(List<Card> cards) {
+    private CardHand(final List<Card> cards) {
         this.cards = cards;
     }
 

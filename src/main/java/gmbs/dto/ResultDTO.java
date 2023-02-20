@@ -16,21 +16,21 @@ public class ResultDTO {
     private final String result;
     private final int cardSum;
 
-    public ResultDTO(Player player, BlackJackResult result) {
+    public ResultDTO(final Player player, final BlackJackResult result) {
         this.name = player.getName();
         this.cards = extractCards(player);
         this.result = extractResults(result);
         this.cardSum = result.getResultHandSum();
     }
 
-    private String extractResults(BlackJackResult result) {
-        if(hasSingleResult(result)) {
+    private String extractResults(final BlackJackResult result) {
+        if (hasSingleResult(result)) {
             return extractSingleResult(result);
         }
         return extractMultipleResult(result);
     }
 
-    private boolean hasSingleResult(BlackJackResult result) {
+    private boolean hasSingleResult(final BlackJackResult result) {
         return result.getResultsData()
                 .entrySet()
                 .stream()
@@ -39,7 +39,7 @@ public class ResultDTO {
                 .size() == 1;
     }
 
-    private static String extractSingleResult(BlackJackResult result) {
+    private static String extractSingleResult(final BlackJackResult result) {
         return result.getResultsData()
                 .entrySet()
                 .stream()
@@ -48,7 +48,7 @@ public class ResultDTO {
                 .collect(Collectors.joining());
     }
 
-    private static String extractMultipleResult(BlackJackResult result) {
+    private static String extractMultipleResult(final BlackJackResult result) {
         return result.getResultsData()
                 .entrySet()
                 .stream()
@@ -61,7 +61,7 @@ public class ResultDTO {
         return entry -> entry.getValue().toString() + entry.getKey().getDescription();
     }
 
-    private String extractCards(Player player) {
+    private String extractCards(final Player player) {
         return player.getCardHand()
                 .getCards()
                 .stream()

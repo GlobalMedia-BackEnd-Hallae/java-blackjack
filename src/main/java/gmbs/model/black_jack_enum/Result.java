@@ -7,7 +7,7 @@ public enum Result {
 
     private final String description;
 
-    Result(String description) {
+    Result(final String description) {
         this.description = description;
     }
 

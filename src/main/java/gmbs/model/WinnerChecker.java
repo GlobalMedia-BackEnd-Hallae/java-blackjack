@@ -16,20 +16,20 @@ public class WinnerChecker {
     private final int targetHandValue;
     private final Map<Result, Integer> targetResults;
 
-    public WinnerChecker(Player comparisonTarget) {
+    public WinnerChecker(final Player comparisonTarget) {
         targetHandValue = calculator.sumHand(comparisonTarget);
         targetResults = Arrays.stream(Result.values())
                 .collect(Collectors.toMap(Function.identity(), ignored -> 0));
     }
 
-    public BlackJackResult getResult(Player opponent) {
+    public BlackJackResult getResult(final Player opponent) {
         int opponentSumHand = calculator.sumHand(opponent);
         Result opponentResult = getResultByValue(opponentSumHand);
-        addComparisonTargetResults(opponentResult);
+        updateComparisonTargetResults(opponentResult);
         return BlackJackResult.singleResultFrom(opponentResult, opponentSumHand);
     }
 
-    private Result getResultByValue(int userHandValue) {
+    private Result getResultByValue(final int userHandValue) {
         if (isBust(targetHandValue) && !isBust(userHandValue)) {
             return Result.WIN;
         }
@@ -42,11 +42,16 @@ public class WinnerChecker {
         return Result.DRAW;
     }
 
-    private boolean isBust(int sumValue) {
+    private void updateComparisonTargetResults(final Result opponentResult) {
+        Result targetResult = opponentResult.getOpponent();
+        targetResults.replace(targetResult, targetResults.get(targetResult) + 1);
+    }
+
+    private boolean isBust(final int sumValue) {
         return sumValue > BLACK_JACK;
     }
 
-    private Result getNoBustResult(int userHandValue) {
+    private Result getNoBustResult(final int userHandValue) {
         if (targetHandValue > userHandValue) {
             return Result.LOSE;
         }
@@ -54,11 +59,6 @@ public class WinnerChecker {
             return Result.WIN;
         }
         return Result.DRAW;
-    }
-
-    private void addComparisonTargetResults(Result opponentResult) {
-        Result targetResult = opponentResult.getOpponent();
-        targetResults.replace(targetResult, targetResults.get(targetResult) + 1);
     }
 
     public BlackJackResult getTargetResult() {
