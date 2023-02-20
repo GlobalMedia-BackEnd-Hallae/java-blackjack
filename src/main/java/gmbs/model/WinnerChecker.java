@@ -21,11 +21,11 @@ public class WinnerChecker {
                 .collect(Collectors.toMap(Function.identity(), ignored -> 0));
     }
 
-    public Result getResult(Player opponent) {
+    public BlackJackResult getResult(Player opponent) {
         int opponentSumHand = calculator.sumHand(opponent.getCardHand());
         Result opponentResult = getResultByValue(opponentSumHand);
         addComparisonTargetResults(opponentResult);
-        return opponentResult;
+        return new BlackJackResult(opponentResult, opponentSumHand);
     }
 
     private Result getResultByValue(int userHandValue) {

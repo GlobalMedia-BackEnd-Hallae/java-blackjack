@@ -29,28 +29,28 @@ class WinnerCheckerTest {
     private static final CardHand twelve = CardHand.of(List.of(spadeAce, clubAce));
 
     @ParameterizedTest
-    @DisplayName("생성 시 넘겨주는 player를 기준으로 cardHand를 비교하여 승,무,패를 반환")
+    @DisplayName("target과 opponent 를 비교하여 opponent의 결과를 반환")
     @MethodSource("hands")
-    void getResult(CardHand dealerHand, CardHand userHand, Result expected) {
+    void getResult(CardHand dealerHand, CardHand userHand, BlackJackResult expected) {
         //given
-        Dealer dealer = new Dealer(dealerHand);
-        User user = new User("user", userHand);
-        WinnerChecker checker = new WinnerChecker(dealer);
+        Dealer target = new Dealer(dealerHand);
+        User opponent = new User("user", userHand);
+        WinnerChecker checker = new WinnerChecker(target);
         //when
-        Result actual = checker.getResult(user);
+        BlackJackResult actual = checker.getResult(opponent);
         //then
         assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> hands() {
         return Stream.of(
-                Arguments.of(blackJack, blackJack, Result.DRAW),
-                Arguments.of(bust, blackJack, Result.WIN),
-                Arguments.of(bust, bust, Result.DRAW),
-                Arguments.of(bust, sixteen, Result.WIN),
-                Arguments.of(sixteen, bust, Result.LOSE),
-                Arguments.of(sixteen, twelve, Result.LOSE),
-                Arguments.of(twelve, sixteen, Result.WIN)
+                Arguments.of(blackJack, blackJack, new BlackJackResult(Result.DRAW, 21)),
+                Arguments.of(bust, blackJack, new BlackJackResult(Result.WIN, 21)),
+                Arguments.of(bust, bust, new BlackJackResult(Result.DRAW, 26)),
+                Arguments.of(bust, sixteen, new BlackJackResult(Result.WIN, 16)),
+                Arguments.of(sixteen, bust, new BlackJackResult(Result.LOSE, 26)),
+                Arguments.of(sixteen, twelve, new BlackJackResult(Result.LOSE, 12)),
+                Arguments.of(twelve, sixteen, new BlackJackResult(Result.WIN, 16))
         );
     }
 
