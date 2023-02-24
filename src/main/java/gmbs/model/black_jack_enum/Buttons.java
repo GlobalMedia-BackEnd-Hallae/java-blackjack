@@ -6,17 +6,17 @@ public enum Buttons {
 
     YES("y"),
     NO("n"),
-    WRONG("");
+    WRONG("not_defined");
 
-    private final String inputValue;
+    private final String description;
 
-    Buttons(final String input) {
-        this.inputValue = input;
+    Buttons(final String description) {
+        this.description = description;
     }
 
     public static Buttons find(final String target) {
         return Arrays.stream(Buttons.values())
-                .filter(input -> input.inputValue.equals(target))
+                .filter(input -> input.description.equals(target))
                 .findAny()
                 .orElse(WRONG);
     }
