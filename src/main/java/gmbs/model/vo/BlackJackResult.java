@@ -18,14 +18,14 @@ public class BlackJackResult {
         this.resultHandSum = resultHandSum;
     }
 
-    public static BlackJackResult singleResultFrom(final Result result, final int resultHandSum) {
+    public static BlackJackResult singleResultOf(final Result result, final int resultHandSum) {
         Map<Result, Integer> results = Arrays.stream(Result.values())
                 .collect(Collectors.toMap(Function.identity(), ignored -> 0));
         results.replace(result, 1);
         return new BlackJackResult(results, resultHandSum);
     }
 
-    public static BlackJackResult resultsFrom(final Map<Result, Integer> results, final int resultHandSum) {
+    public static BlackJackResult resultsOf(final Map<Result, Integer> results, final int resultHandSum) {
         return new BlackJackResult(results, resultHandSum);
     }
 

@@ -18,7 +18,7 @@ class BlackJackResultTest {
         Result result = Result.WIN;
         int sum = 19;
         //when
-        BlackJackResult blackJackResult = BlackJackResult.singleResultFrom(result, sum);
+        BlackJackResult blackJackResult = BlackJackResult.singleResultOf(result, sum);
         //then
         assertThat(blackJackResult.getResultsData())
                 .containsEntry(Result.DRAW, 0)
@@ -37,7 +37,7 @@ class BlackJackResultTest {
         results.put(Result.LOSE, 3);
         int sum = 19;
         //when
-        BlackJackResult blackJackResult = BlackJackResult.resultsFrom(results, sum);
+        BlackJackResult blackJackResult = BlackJackResult.resultsOf(results, sum);
         //then
         assertThat(blackJackResult.getResultsData())
                 .containsEntry(Result.WIN, 1)

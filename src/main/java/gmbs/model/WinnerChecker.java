@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 public class WinnerChecker {
 
     private static final int BLACK_JACK = 21;
-    private final HandCalculator calculator = new HandCalculator();
     private final int targetHandValue;
     private final Map<Result, Integer> targetResults;
+    private final HandCalculator calculator = new HandCalculator();
 
     public WinnerChecker(final Player comparisonTarget) {
         targetHandValue = calculator.sumHand(comparisonTarget);
@@ -26,7 +26,7 @@ public class WinnerChecker {
         int opponentSumHand = calculator.sumHand(opponent);
         Result opponentResult = getResultByValue(opponentSumHand);
         updateComparisonTargetResults(opponentResult);
-        return BlackJackResult.singleResultFrom(opponentResult, opponentSumHand);
+        return BlackJackResult.singleResultOf(opponentResult, opponentSumHand);
     }
 
     private Result getResultByValue(final int userHandValue) {
@@ -62,6 +62,6 @@ public class WinnerChecker {
     }
 
     public BlackJackResult getTargetResult() {
-        return BlackJackResult.resultsFrom(targetResults, targetHandValue);
+        return BlackJackResult.resultsOf(targetResults, targetHandValue);
     }
 }
