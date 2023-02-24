@@ -27,10 +27,10 @@ class WinnerCheckerTest {
     private static final Card clubAce = new Card(CardSuits.CLUB, BlackJackValue.ACE);
     private static final Card spadeQueen = new Card(CardSuits.SPADE, BlackJackValue.QUEEN);
     private static final Card spadeSix = new Card(CardSuits.SPADE, BlackJackValue.SIX);
-    private static final CardHand bust = CardHand.of(List.of(spadeQueen, spadeQueen, spadeSix));
-    private static final CardHand blackJack = CardHand.of(List.of(spadeAce, spadeQueen));
-    private static final CardHand sixteen = CardHand.of(List.of(spadeQueen, spadeSix));
-    private static final CardHand twelve = CardHand.of(List.of(spadeAce, clubAce));
+    private static final CardHand bust = CardHand.from(List.of(spadeQueen, spadeQueen, spadeSix));
+    private static final CardHand blackJack = CardHand.from(List.of(spadeAce, spadeQueen));
+    private static final CardHand sixteen = CardHand.from(List.of(spadeQueen, spadeSix));
+    private static final CardHand twelve = CardHand.from(List.of(spadeAce, clubAce));
 
     @ParameterizedTest
     @DisplayName("target과 opponent 를 비교하여 opponent의 결과를 반환")

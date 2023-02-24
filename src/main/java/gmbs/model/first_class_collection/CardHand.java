@@ -9,11 +9,11 @@ public class CardHand {
 
     private final List<Card> cards;
 
-    public static CardHand of(final List<Card> cards) {
+    public static CardHand from(final List<Card> cards) {
         return new CardHand(cards);
     }
 
-    public static CardHand from(final CardHand presentHand, CardHand drawHand) {
+    public static CardHand of(final CardHand presentHand, final CardHand drawHand) {
         List<Card> addedCards = new ArrayList<>(presentHand.getCards());
         addedCards.addAll(drawHand.getCards());
         return new CardHand(addedCards);

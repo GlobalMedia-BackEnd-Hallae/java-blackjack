@@ -21,7 +21,7 @@ public class Deck {
         for (int i = 0; i < cardCount; i++) {
             drawCards.add(deckCards.pop());
         }
-        return CardHand.of(drawCards);
+        return CardHand.from(drawCards);
     }
 
     private void validateDrawSize(final int cardCount) {

@@ -19,8 +19,8 @@ class PlayerTest {
 
     private static final Card firstCard = new Card(CardSuits.SPADE, BlackJackValue.ACE);
     private static final Card secondCard = new Card(CardSuits.HEART, BlackJackValue.ACE);
-    private static final CardHand beforeHitHand = CardHand.of(List.of(firstCard, secondCard));
-    private static final CardHand hitDraw = CardHand.of(List.of(new Card(CardSuits.DIAMOND, BlackJackValue.ACE)));
+    private static final CardHand beforeHitHand = CardHand.from(List.of(firstCard, secondCard));
+    private static final CardHand hitDraw = CardHand.from(List.of(new Card(CardSuits.DIAMOND, BlackJackValue.ACE)));
 
     @ParameterizedTest
     @DisplayName("card를 인자로 받아 hit하면 인자로 받은 card를 포함하는 Player를 생성")

@@ -19,14 +19,14 @@ public class PlayerDTO {
         this.name = name;
     }
 
-    public static PlayerDTO oneCardOf(final Player player) {
+    public static PlayerDTO oneCardFrom(final Player player) {
         Card firstCard = player.getCardHand()
                 .getCards()
                 .get(FIRST_CARD_INDEX);
         return new PlayerDTO(List.of(firstCard), player.getName());
     }
 
-    public static PlayerDTO allCardOf(final Player player) {
+    public static PlayerDTO allCardFrom(final Player player) {
         List<Card> allCards = player.getCardHand()
                 .getCards();
         return new PlayerDTO(allCards, player.getName());

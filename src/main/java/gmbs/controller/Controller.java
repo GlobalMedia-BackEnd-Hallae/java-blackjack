@@ -58,8 +58,8 @@ public class Controller {
     }
 
     private void showFirstStatus(final List<Player> users, final Player dealer) {
-        output.showPlayerInfo(PlayerDTO.oneCardOf(dealer));
-        users.forEach(user -> output.showPlayerInfo(PlayerDTO.allCardOf(user)));
+        output.showPlayerInfo(PlayerDTO.oneCardFrom(dealer));
+        users.forEach(user -> output.showPlayerInfo(PlayerDTO.allCardFrom(user)));
     }
 
     private List<Player> usersHit(final List<Player> users) {
@@ -72,7 +72,7 @@ public class Controller {
         Player afterHit = user;
         while (calculator.canHit(afterHit) && isYes(afterHit)) {
             afterHit = manager.hit(afterHit);
-            output.showPlayerInfo(PlayerDTO.allCardOf(afterHit));
+            output.showPlayerInfo(PlayerDTO.allCardFrom(afterHit));
         }
         return afterHit;
     }

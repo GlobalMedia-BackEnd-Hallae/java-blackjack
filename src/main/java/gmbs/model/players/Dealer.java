@@ -14,7 +14,7 @@ public class Dealer implements Player {
 
     @Override
     public Dealer draw(final CardHand drawCards) {
-        return new Dealer(CardHand.from(this.cards, drawCards));
+        return new Dealer(CardHand.of(this.cards, drawCards));
     }
 
     @Override

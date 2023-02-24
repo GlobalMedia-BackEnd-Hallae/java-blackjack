@@ -74,10 +74,10 @@ class HandCalculatorTest {
     }
 
     private static Dealer createDealer(final List<Card> cards) {
-        return new Dealer(CardHand.of(cards));
+        return new Dealer(CardHand.from(cards));
     }
 
     private static User createUser(final List<Card> cards) {
-        return new User(new UserName("testUser"), CardHand.of(cards));
+        return new User(new UserName("testUser"), CardHand.from(cards));
     }
 }
