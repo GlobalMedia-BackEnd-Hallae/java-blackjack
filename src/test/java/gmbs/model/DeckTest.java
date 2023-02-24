@@ -13,8 +13,8 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 class DeckTest {
 
     @Test
-    @DisplayName("card리스트를 통해 생성된 deck을 draw시 card 한 장을 반환하는지 확인")
-    void draw2() {
+    @DisplayName("주어진 수 만큼 deck에서 카드를 draw하는지 확인")
+    void draw() {
         //given
         Card heartAce = new Card(CardSuits.HEART, BlackJackValue.ACE);
         Card heartJack = new Card(CardSuits.HEART, BlackJackValue.JACK);
@@ -24,7 +24,8 @@ class DeckTest {
         Deck deck = new Deck(deckCards);
         int drawCount = 2;
         //when
-        List<Card> drawCards = deck.draw(drawCount).getCards();
+        List<Card> drawCards = deck.draw(drawCount)
+                .getCards();
         //then
         assertThat(drawCards).hasSize(drawCount);
         assertThat(deckCards).containsAll(drawCards);
