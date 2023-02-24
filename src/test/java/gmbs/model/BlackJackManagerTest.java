@@ -56,12 +56,14 @@ class BlackJackManagerTest {
     @Test
     @DisplayName("dealer를 생성하는지 확인")
     void createDealer() {
-        assertThat(manager.createDealer()).isInstanceOf(Dealer.class);
+        assertThat(manager.createDealer())
+                .isInstanceOf(Dealer.class);
     }
 
     @Test
     @DisplayName("user를 생성하는지 확인")
     void createUser() {
-        assertThat(manager.createUser(new UserName("userName"))).isInstanceOf(User.class);
+        assertThat(manager.createUser(new UserName("userName")))
+                .isInstanceOf(User.class);
     }
 }
