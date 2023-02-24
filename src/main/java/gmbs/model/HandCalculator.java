@@ -15,7 +15,7 @@ public class HandCalculator {
     private static final int BLACK_JACK = 21;
     private static final int DEALER_HIT_THRESHOLD = 16;
     private static final int SMALLER_ACE_VALUE = BlackJackValue.ACE.value();
-    private static final int BIGGER_ACE_VALUE = BlackJackValue.ACE.alternativeValue();
+    private static final int BIGGER_ACE_VALUE = 11;
 
     public boolean canHit(final Player player) {
         int sumHand = sumHand(player);
