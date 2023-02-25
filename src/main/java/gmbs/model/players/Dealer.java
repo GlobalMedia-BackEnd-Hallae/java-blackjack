@@ -1,0 +1,30 @@
+package gmbs.model.players;
+
+import gmbs.model.first_class_collection.CardHand;
+import gmbs.model.vo.UserName;
+
+public class Dealer implements Player {
+
+    private static final UserName name = new UserName("dealer");
+    private final CardHand cards;
+
+    public Dealer(final CardHand cards) {
+        this.cards = cards;
+    }
+
+    @Override
+    public Dealer draw(final CardHand drawCards) {
+        return new Dealer(CardHand.of(this.cards, drawCards));
+    }
+
+    @Override
+    public CardHand getCardHand() {
+        return cards;
+    }
+
+
+    @Override
+    public String getName() {
+        return name.getName();
+    }
+}
