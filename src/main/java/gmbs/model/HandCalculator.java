@@ -9,6 +9,7 @@ import gmbs.model.players.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.stream.Collectors;
 
 public class HandCalculator {
 
@@ -61,7 +62,7 @@ public class HandCalculator {
         int currentLastValue = previousDegree.get(previousLastIndex) + BIGGER_ACE_VALUE;
         List<Integer> currentDegree = new ArrayList<>(previousDegree.stream()
                 .map(value -> value + SMALLER_ACE_VALUE)
-                .toList());
+                .collect(Collectors.toUnmodifiableList()));
         currentDegree.add(currentLastValue);
         return currentDegree;
     }

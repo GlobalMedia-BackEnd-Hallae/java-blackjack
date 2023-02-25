@@ -7,6 +7,7 @@ import gmbs.model.vo.Card;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CardGenerator {
 
@@ -14,12 +15,12 @@ public class CardGenerator {
         return Arrays.stream(CardSuits.values())
                 .map(this::createByShape)
                 .flatMap(Collection::stream)
-                .toList();
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private List<Card> createByShape(final CardSuits shape) {
         return Arrays.stream(BlackJackValue.values())
                 .map(cardValue -> new Card(shape, cardValue))
-                .toList();
+                .collect(Collectors.toUnmodifiableList());
     }
 }

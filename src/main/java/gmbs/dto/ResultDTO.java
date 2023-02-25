@@ -35,8 +35,7 @@ public class ResultDTO {
                 .entrySet()
                 .stream()
                 .filter(a -> a.getValue() > 0)
-                .toList()
-                .size() == 1;
+                .count() == 1;
     }
 
     private static String extractSingleResult(final BlackJackResult result) {

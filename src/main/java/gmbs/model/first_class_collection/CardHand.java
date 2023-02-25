@@ -28,9 +28,8 @@ public class CardHand {
     }
 
     public int aceCount() {
-        return cards.stream()
+        return (int) cards.stream()
                 .filter(Card::isAce)
-                .toList()
-                .size();
+                .count();
     }
 }

@@ -11,6 +11,7 @@ import gmbs.view.Output;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Controller {
 
@@ -43,13 +44,13 @@ public class Controller {
         return createUserNames()
                 .stream()
                 .map(name -> (Player) manager.createUser(name))
-                .toList();
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private List<UserName> createUserNames() {
         return Arrays.stream(requestUserNames())
                 .map(UserName::new)
-                .toList();
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private String[] requestUserNames() {
@@ -65,7 +66,7 @@ public class Controller {
     private List<Player> usersHit(final List<Player> users) {
         return users.stream()
                 .map(this::chooseHit)
-                .toList();
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private Player chooseHit(final Player user) {
@@ -95,7 +96,7 @@ public class Controller {
     private List<ResultDTO> getUserResults(final WinnerChecker checker, final List<Player> users) {
         return users.stream()
                 .map(user -> new ResultDTO(user, checker.getResult(user)))
-                .toList();
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private void showResult(final List<ResultDTO> users, final ResultDTO dealer) {
